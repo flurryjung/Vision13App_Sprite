@@ -49,12 +49,27 @@ class ViewController: UIViewController, ARSKViewDelegate {
     
     // MARK: - ARSKViewDelegate
     
+    
     func view(_ view: ARSKView, nodeFor anchor: ARAnchor) -> SKNode? {
         // Create and configure a node for the anchor added to the view's session.
+        //draw a blue circle
+        let path = CGMutablePath()
+        path.addArc(center: CGPoint.zero,
+                    radius: 5,
+                    startAngle: 0,
+                    endAngle: CGFloat.pi * 2,
+                    clockwise: true)
+        let ball = SKShapeNode(path: path)
+        ball.lineWidth = 1
+        ball.fillColor = .blue
+        ball.strokeColor = .blue
+        ball.glowWidth = 0.5
+        
+        /*
         let labelNode = SKLabelNode(text: "👾")
         labelNode.horizontalAlignmentMode = .center
-        labelNode.verticalAlignmentMode = .center
-        return labelNode;
+        labelNode.verticalAlignmentMode = .center*/
+        return ball;
     }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
